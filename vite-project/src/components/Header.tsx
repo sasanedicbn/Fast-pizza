@@ -1,9 +1,9 @@
 const Header = () => {
     return(
-        <nav>
+        <nav className="nav-bar">
             <ul>
                 <li>FAST REACT PIZZA CO.</li>
-                <li><input type="text" placeholder="Search Order  #"/></li>
+                <li><input type="text" placeholder=" Search Order  #"/></li>
             </ul>
         </nav>
     )
