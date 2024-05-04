@@ -4,15 +4,19 @@ import { createSlice } from '@reduxjs/toolkit';
 const customerSlice = createSlice({
   name: 'customer',
   initialState: {
-    customerName: false,
+    button: false,
+    customerName: '',
   },
   reducers: {
-    showCustomerName: state => {
-        state.customerName = true,
+    showButton: state => {
+        state.button = true;
+    },
+    getName: (state,action) => {
+        state.customerName = action.payload
     }
   }
 });
 
-export const showCustomerName = customerSlice.actions;
+export const {showButton,getName} = customerSlice.actions;
 
 export default customerSlice.reducer;
