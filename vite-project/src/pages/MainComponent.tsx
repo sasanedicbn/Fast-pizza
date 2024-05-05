@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { getName } from '../store/CustomerSlice';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 
 const MainComponent = () => {
     const [userName, setUserName] = useState('')
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const handleUserName = (event) => {
         setUserName(event.target.value)
@@ -15,7 +16,10 @@ const MainComponent = () => {
     const handleCustomerName = (event) => {
         event.preventDefault()
         dispatch(getName(userName)); 
+        navigate('/menu')
+
     };
+    console.log(userName)
 
     return (
         <div className="main-container">
@@ -30,8 +34,7 @@ const MainComponent = () => {
                     value={userName}
                     onChange={handleUserName} 
                 />
-              
-                {userName && <Link to='/menu' className='custom-button'>START ORDERING</Link>}
+                {userName && <button type='submit' className='custom-button'>START ORDERING</button>}
             </form>
         </div>
     );
