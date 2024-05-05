@@ -9,6 +9,7 @@ const customerSlice = createSlice({
   reducers: {
     getName: (state,action) => {
         state.customerName = action.payload
+        console.log('state', state , 'action', action)
     }
   }
 });
