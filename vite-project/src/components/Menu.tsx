@@ -22,8 +22,7 @@ const Menu = () => {
     }, []); 
 console.log(menuItems)
     return (
-        <div>
-            <h2>Menu Items</h2>
+        <div className="menu-main-container">
             <ul>
                 {menuItems.map((menuItem, index) => (
                     <MenuSingleItem key={index} menuItem={menuItem}/>
