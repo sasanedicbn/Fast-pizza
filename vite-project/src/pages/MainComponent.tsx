@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { getName } from '../store/CustomerSlice';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const MainComponent = () => {
@@ -30,7 +31,7 @@ const MainComponent = () => {
                     onChange={handleUserName} 
                 />
               
-                {userName && <button className='custom-button'>START ORDERING</button>}
+                {userName && <Link to='/menu' className='custom-button'>START ORDERING</Link>}
             </form>
         </div>
     );
