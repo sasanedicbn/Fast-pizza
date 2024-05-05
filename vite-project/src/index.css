@@ -7,7 +7,7 @@ body{
   font-family:'cida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .nav-bar{
-  background-color: rgb(226, 226, 36);
+  background-color: #fad91f;
   width: 100%;
   height: 60px;
 }
@@ -59,7 +59,7 @@ body{
   font-size: 36px;
   text-align: center;
   margin-bottom: 20px;
-  color: rgb(226, 226, 36);
+  color: #fad91f;
   font-weight: bold;
 }
 
@@ -75,4 +75,39 @@ body{
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 30px;
+}
+.main-container form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.custom-button {
+  margin-top: 20px;
+  display: inline-block;
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  background-color: #fad91f;
+  color: #4B5563;
+  border-radius: 9999px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  background-color: #f5d556;
+}
+
+.custom-button:focus {
+  box-shadow: 0 0 0 2px #FDE68A, 0 0 0 4px rgba(253, 230, 138, 0.5);
+}
+
+.custom-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
