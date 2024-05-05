@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import MenuSingleItem from "./MenuSingleItem";
 
 const Menu = () => {
     const [menuItems, setMenuItems] = useState([]);
@@ -25,7 +26,7 @@ console.log(menuItems)
             <h2>Menu Items</h2>
             <ul>
                 {menuItems.map((menuItem, index) => (
-                    <li key={index}>{menuItem.name}: ${menuItem.price}</li>
+                    <MenuSingleItem key={index} menuItem={menuItem}/>
                 ))}
             </ul>
         </div>
