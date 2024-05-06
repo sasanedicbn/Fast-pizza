@@ -1,8 +1,11 @@
+import { useState } from "react";
+import OrderBar from "./OrderBar";
 
 const MenuSingleItem = ({ menuItem }) => {
     const { name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
 
     return (
+        <>
         <div className="menu-item">
             <div className="menu-item-details">
             <div className="menu-item-image">
@@ -15,9 +18,10 @@ const MenuSingleItem = ({ menuItem }) => {
             </div>
             </div>
             <button className={`menu-item-button ${soldOut ? 'sold-out' : ''}`} disabled={soldOut}>
-                    {soldOut ? 'SOLD OUT' : 'ADD TO CART'}
-                </button>
+                    {soldOut ? 'SOLD OUT' : 'ADD TO CART'}      
+            </button>
         </div>
+        </>
     );
 };
 

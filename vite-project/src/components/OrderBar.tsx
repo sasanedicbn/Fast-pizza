@@ -1,12 +1,12 @@
 const OrderBar = () => {
     return(
-        <div>
-        <div>
-         <p>Number</p>
-         <p>PIZZAS</p>
-         <p>$24.00</p>
-        </div>
-        <p>OPEN CART </p>
+        <div className="orderbar-container">
+         <div className="orderbar-details">
+          <p>Number</p>
+          <p>PIZZAS</p>
+          <p>$24.00</p>
+         </div>
+          <p className="openCart">OPEN CART </p>
         </div>
     )
 }
