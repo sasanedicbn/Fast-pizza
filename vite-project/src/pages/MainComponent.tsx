@@ -1,11 +1,13 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getName } from '../store/CustomerSlice';
 import { useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
+import ContinueOrdering from '../components/ContinueOrdering';
 
 
 const MainComponent = () => {
     const [userName, setUserName] = useState('')
+    const name = useSelector(state => state.customer.customerName)
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
@@ -17,7 +19,6 @@ const MainComponent = () => {
         event.preventDefault()
         dispatch(getName(userName)); 
         navigate('/menu')
-
     };
     console.log(userName)
 
@@ -27,14 +28,14 @@ const MainComponent = () => {
             <p className="welcome-text">Straight out of the oven, straight to you. </p>
             <p className="welcome-instruction">👋 Welcome! Please start by telling us your name:</p>
             <form onSubmit={handleCustomerName}>
-                <input
+               { name ? <ContinueOrdering/> : <input
                     type="text"
                     className="input-field"
                     placeholder="Your full name"
                     value={userName}
                     onChange={handleUserName} 
-                />
-                {userName && <button type='submit' className='custom-button'>START ORDERING</button>}
+                />}
+                { userName && <button type='submit' className='custom-button' value={name}>START ORDERING</button>}
             </form>
         </div>
     );
