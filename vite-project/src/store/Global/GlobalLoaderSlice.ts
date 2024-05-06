@@ -7,8 +7,8 @@ const GlobalLoaderSlice = createSlice({
     loader: false,
   },
   reducers: {
-    getLoader: (state) => {
-        state.loader = true
+    getLoader: (state,action) => {
+        state.loader = action.payload
     }
   }
 });
