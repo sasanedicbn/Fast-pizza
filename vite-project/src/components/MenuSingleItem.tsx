@@ -5,7 +5,7 @@ import { addPizza, removePizza } from "../store/NumberPizza";
 
 const MenuSingleItem = ({ menuItem }) => {
     const { id, name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
-    const pizzaCount = useSelector(state => state.pizza[id] || 0);
+    const pizzaCount = useSelector(state => state.pizza[id]);
     const dispatch = useDispatch();
     console.log(pizzaCount)
     console.log('dolazi',{id})
