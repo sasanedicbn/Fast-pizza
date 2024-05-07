@@ -1,7 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
+import NumberPizza from "./NumberPizza";
 
 
 const MenuSingleItem = ({ menuItem }) => {
     const { name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
+    const pizza = useSelector(state => state.pizza.pizza)
 
     return (
         <>
@@ -16,9 +19,10 @@ const MenuSingleItem = ({ menuItem }) => {
                 <p className="menu-item-price">€{unitPrice.toFixed(2)}</p>
             </div>
             </div>
-            <button className={`menu-item-button ${soldOut ? 'sold-out' : ''}`} disabled={soldOut}>
+            {pizza.length > 0 ? <NumberPizza/> : <button className={`menu-item-button ${soldOut ? 'sold-out' : ''}`} disabled={soldOut}>
                     {soldOut ? 'SOLD OUT' : 'ADD TO CART'}      
-            </button>
+            </button>}
+            
         </div>
         </>
     );
