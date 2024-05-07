@@ -7,13 +7,15 @@ const pizzaSlice = createSlice({
     pizza: 1,
   },
   reducers: {
-    getPizza: (state,action) => {
-        state.pizza = action.payload
-        console.log(action.payload)
+    addPizza: (state) => {
+        state.pizza++
+    },
+    removePiza(state){
+        state.pizza++
     }
   }
 });
 
-export const {getPizza} = pizzaSlice.actions;
+export const {addPizza, removePiza} = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;
