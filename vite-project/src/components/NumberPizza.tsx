@@ -1,25 +1,16 @@
-const NumberPizza = () => {
-    const dispatch = useDispatch();
-    const pizzaCount = useSelector(state => state.pizza.pizza);
 
-    const handleAddPizza = () => {
-        dispatch(addPizza());
-    };
+// NumberPizza.tsx
+const NumberPizza = ({ pizzaCount, handleAddPizza, handleRemovePizza }) => {
+    return (
+        <div className="container-number-pizza">
+            <button className="btn" onClick={handleAddPizza}>+</button>
+            <p>{pizzaCount}</p>
+            <button className="btn" onClick={handleRemovePizza}>-</button>
+            <button className='menu-item-button'>
+                Delete   
+            </button>
+        </div>
+    );
+};
 
-    const handleRemovePizza = () => {
-        if (pizzaCount > 0) {
-            dispatch(removePizza());
-        }
-    };
-    return(
-    <div className="container-number-pizza">
-     <button className="btn">+</button>
-     <p>{1}</p>
-     <button className="btn">-</button>
-     <button className='menu-item-button'>
-       Delete   
-     </button>
-    </div>
-    )
-}
 export default NumberPizza;

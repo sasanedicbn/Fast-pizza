@@ -7,7 +7,6 @@ import Loader from "./Loader";
 const Menu = () => {
     const [menuItems, setMenuItems] = useState([]);
     const isLoading = useSelector(state => state.loader.loader); 
-   console.log(isLoading)
     const dispatch  = useDispatch();
 
     useEffect(() => {
@@ -29,7 +28,6 @@ const Menu = () => {
 
         fetchMenu(); 
     }, []); 
-    console.log(menuItems)
     return (
         <div className="menu-main-container">
             {isLoading ? <Loader/> : ( 

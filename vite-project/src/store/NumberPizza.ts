@@ -2,20 +2,27 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const pizzaSlice = createSlice({
-  name: 'pizza',
-  initialState: {
-    pizza: 1,
-  },
-  reducers: {
-    addPizza: (state) => {
-        state.pizza++
-    },
-    removePiza(state){
-        state.pizza++
+    name: 'pizza',
+    initialState: {},
+    reducers: {
+      addPizza: (state, action) => {
+        const { id } = action.payload;
+        console.log(id)
+        if (!state[id]) {
+          state[id] = 0;
+        }
+        state[id]++;
+          },
+
+      removePizza: (state, action) => {
+        const { id } = action.payload;
+        if (state[id] && state[id] > 0) {
+          state[id]--;
+        }
+      }
     }
-  }
-});
+  });
+  
 
-export const {addPizza, removePiza} = pizzaSlice.actions;
-
+export const {addPizza, removePizza} = pizzaSlice.actions;
 export default pizzaSlice.reducer;
