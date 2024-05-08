@@ -6,6 +6,8 @@ const Header = () => {
     const name = useSelector(state => state.customer.customerName)
     const pizzaSlice = useSelector(state => state.pizza)
     console.log('hhh', pizzaSlice)
+    const showOrderBar = Object.values(pizzaSlice).reduce((total, pizza) => total + pizza.count, 0) >= 1;
+
     return(
         <>
         <nav className="nav-bar">
@@ -16,7 +18,7 @@ const Header = () => {
             </ul>
         </nav>
         <Outlet/>
-         {Object.keys(pizzaSlice).length > 0 && <OrderBar/>}
+         {showOrderBar && <OrderBar/>}
          </>
     )
 }
