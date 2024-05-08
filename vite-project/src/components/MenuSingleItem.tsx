@@ -5,17 +5,20 @@ import { addPizza, removePizza } from "../store/NumberPizza";
 
 const MenuSingleItem = ({ menuItem }) => {
     const { id, name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
-    const pizzaCount = useSelector(state => state.pizza[id]);
-    const dispatch = useDispatch();
+    const pizzaCount = useSelector(state => state.pizza[id]?.count);
     console.log(pizzaCount)
-    console.log('dolazi',{id})
+    // console.log(pizzaCount)
+    const dispatch = useDispatch();
+    // console.log(menuItem)
+    // console.log(pizzaCount)
+    // console.log('dolazi',{id})
     
     const handleAddPizza = () => {
-        dispatch(addPizza({ id }));
+        dispatch(addPizza(menuItem));
     };
 
     const handleRemovePizza = () => {
-        dispatch(removePizza({ id }));
+        dispatch(removePizza(menuItem));
     };
   
     return (

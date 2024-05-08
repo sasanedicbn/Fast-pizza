@@ -6,18 +6,19 @@ const pizzaSlice = createSlice({
     initialState: {},
     reducers: {
       addPizza: (state, action) => {
-        const { id } = action.payload;
-        console.log(id)
+        const pizza = action.payload;
+        const {id} = pizza
+        console.log(pizza)
         if (!state[id]) {
-          state[id] = 0;
+          state[id] = {...pizza, count: 0}
         }
-        state[id]++;
+        state[id].count++;
           },
 
       removePizza: (state, action) => {
         const { id } = action.payload;
-        if (state[id] && state[id] > 0) {
-          state[id]--;
+        if (state[id] && state[id].count > 0) {
+          state[id].count--;
         }
       },
     }
