@@ -9,9 +9,6 @@ const MenuSingleItem = ({ menuItem }) => {
     console.log(pizzaCount)
     // console.log(pizzaCount)
     const dispatch = useDispatch();
-    // console.log(menuItem)
-    // console.log(pizzaCount)
-    // console.log('dolazi',{id})
     
     const handleAddPizza = () => {
         dispatch(addPizza(menuItem));
