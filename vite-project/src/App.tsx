@@ -5,6 +5,7 @@ import MainComponent from './pages/MainComponent';
 import Menu from './components/Menu';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import Cart from './pages/Cart';
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,7 @@ function App() {
       children: [
         { path: '/', element: <MainComponent /> },
         { path: '/menu', element: <Menu /> },
+        {path: '/cart', element: <Cart/>}
       ],
     },
   ]);

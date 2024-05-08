@@ -258,3 +258,7 @@ body{
   justify-content: space-evenly;
   width: 250px;
 }
+/* CART*/
+.cart-container{
+  background-color: red;
+}
