@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const OrderBar = () => {
     const pizzaState = useSelector(state => state.pizza)
@@ -13,7 +14,7 @@ const OrderBar = () => {
           <p>{totalPizzas} PIZZAS</p>
           <p>${totalPrice.toFixed(2)} </p>
          </div>
-          <p className="openCart">OPEN CART  </p>
+          <Link to='/cart' className="openCart">OPEN CART <span>→</span></Link>
         </div>
     )
 }

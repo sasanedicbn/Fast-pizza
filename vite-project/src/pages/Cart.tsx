@@ -4,8 +4,8 @@ import NumberPizza from "../components/NumberPizza"
 const Cart = () => {
     return(
         <div className="cart-container">
-            <Link to='/menu'>Back to menu</Link>
-            <p>Your cart, name</p>
+            <Link to='/menu' className="back-menu">← Back to menu</Link>
+            <p className="cart-name">Your cart, name</p>
             <div className="cart-details">
               <ul>
                <li>2X Margarita</li>
@@ -15,8 +15,8 @@ const Cart = () => {
               </div>
             </div>
             <div>
-                <button>ORDER PIZZAS</button>
-                <button>CLEAR CART</button>
+                <button className="custom-button">ORDER PIZZAS</button>
+                <button className="custom-button clear-btn">CLEAR CART</button>
             </div>
 
         </div>
