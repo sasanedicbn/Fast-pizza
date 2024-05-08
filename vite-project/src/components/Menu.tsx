@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MenuSingleItem from "./MenuSingleItem";
+import MenuSingleItem from "../pages/MenuSingleItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoader } from "../store/Global/GlobalLoaderSlice";
 import Loader from "./Loader";

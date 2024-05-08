@@ -1,12 +1,12 @@
 import {  useDispatch, useSelector } from "react-redux";
-import NumberPizza from "./NumberPizza";
+import NumberPizza from "../components/NumberPizza";
 import { addPizza, removePizza } from "../store/NumberPizza";
 
 
 const MenuSingleItem = ({ menuItem }) => {
     const { id, name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
     const pizzaCount = useSelector(state => state.pizza[id]?.count);
-   
+    console.log('deveta',pizzaCount)
     const dispatch = useDispatch();
     
     const handleAddPizza = () => {

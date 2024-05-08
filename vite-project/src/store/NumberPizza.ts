@@ -10,6 +10,7 @@ const pizzaSlice = createSlice({
         const {id} = pizza
         console.log(pizza)
         if (!state[id]) {
+            console.log(state[id])
           state[id] = {...pizza, count: 0}
         }
         state[id].count++;
