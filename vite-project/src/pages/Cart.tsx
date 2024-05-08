@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom"
 import NumberPizza from "../components/NumberPizza"
 
 const Cart = () => {
     return(
         <div className="cart-container">
-            <p>Back to menu</p>
+            <Link to='/menu'>Back to menu</Link>
             <p>Your cart, name</p>
             <div className="cart-details">
-              <p>2X Margarita</p>
+              <ul>
+               <li>2X Margarita</li>
+              </ul>
               <div>
                  <NumberPizza/>
               </div>

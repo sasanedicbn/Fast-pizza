@@ -261,4 +261,18 @@ body{
 /* CART*/
 .cart-container{
   background-color: red;
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-top: 180px;
+}
+.cart-details{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cart-details ul li {
+  list-style-type: none;
 }

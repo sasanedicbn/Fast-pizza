@@ -15,7 +15,7 @@ function App() {
       children: [
         { path: '/', element: <MainComponent /> },
         { path: '/menu', element: <Menu /> },
-        {path: '/cart', element: <Cart/>}
+        { path: '/cart', element: <Cart/>}
       ],
     },
   ]);
