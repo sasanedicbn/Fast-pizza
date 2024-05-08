@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import OrderBar from '../components/OrderBar';
 
 const Header = () => {
     const name = useSelector(state => state.customer.customerName)
-    // console.log( name)
+    const pizzaSlice = useSelector(state => state.pizza)
     return(
         <>
         <nav className="nav-bar">
@@ -14,6 +15,7 @@ const Header = () => {
             </ul>
         </nav>
         <Outlet/>
+        {pizzaSlice && <OrderBar/>}
          </>
     )
 }

@@ -19,7 +19,7 @@ const pizzaSlice = createSlice({
         if (state[id] && state[id] > 0) {
           state[id]--;
         }
-      }
+      },
     }
   });
   
