@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 import NumberPizza from "../components/NumberPizza";
 import { useDispatch, useSelector } from "react-redux";
-import { addPizza, removePizza } from "../store/NumberPizza";
+import { addPizza, clearCart, removePizza } from "../store/NumberPizza";
 
 const Cart = () => {
     const orderPizzas = useSelector(state => state.pizza);
     const dispatch = useDispatch()
     console.log(orderPizzas);
-  
+    function handleClearCart() {
+        dispatch(clearCart())
+    }
+    
+    
     return (
         <div>
                 <div  className="cart-container">
@@ -27,7 +31,7 @@ const Cart = () => {
                     ))}
                     <div>
                         <button className="custom-button">ORDER PIZZAS</button>
-                        <button className="custom-button clear-btn">CLEAR CART</button>
+                        <button className="custom-button clear-btn" onClick={handleClearCart}>CLEAR CART</button>
                     </div>
                 </div>
         </div>

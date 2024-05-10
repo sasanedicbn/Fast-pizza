@@ -23,9 +23,12 @@ const pizzaSlice = createSlice({
             existingPizza.count--;
         }
       },
+      clearCart: (state, action) => {
+        state.splice(0, state.length)
+      }
     }
   });
   
 
-export const {addPizza, removePizza} = pizzaSlice.actions;
+export const {addPizza, removePizza, clearCart} = pizzaSlice.actions;
 export default pizzaSlice.reducer;
