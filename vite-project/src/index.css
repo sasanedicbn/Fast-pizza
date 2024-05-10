@@ -322,3 +322,72 @@ body{
   font-weight: bold;
   color: rgb(68, 67, 67);
 }
+/* Order */
+.order-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  padding: 20px;
+  border-radius: 5px;
+  color: rgb(73, 72, 72);
+}
+
+.order-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.order-container form div {
+  margin-bottom: 15px;
+}
+
+.order-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.order-container input[type="text"] {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.order-container button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #fad91f;
+  color: rgb(49, 49, 49);
+  border: none;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-position{
+ position: absolute;
+ width: 100px;
+}
+/* oko ovoga gore trebam da se bakcem da razdvojim btne */
+
+.order-container input[type="checkbox"] {
+  margin-right: 10px;
+  width: 400px;
+}
+
+/* Stilizacija za dodatni checkbox div */
+.order-container div:last-child {
+  display: flex;
+  align-items: center;
+}
+
+.order-container div:last-child input[type="checkbox"],
+.order-container div:last-child p {
+  margin: 0;
+}
+.order-container form div {
+  display: flex;
+  justify-content: space-between;
+}

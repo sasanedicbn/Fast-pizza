@@ -14,7 +14,7 @@ const Order = () => {
                 <div>
                     <label htmlFor="location">Location</label>
                     <input type="text" id="location" />
-                    <button>Get Position</button>
+                    <button className="btn-position">Get Position</button>
                 </div>
                 <div>
                     <input type="checkbox" id="priorityOrder" />
