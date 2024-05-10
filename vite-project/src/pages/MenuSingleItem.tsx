@@ -1,12 +1,13 @@
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NumberPizza from "../components/NumberPizza";
 import { addPizza, removePizza } from "../store/NumberPizza";
 
-
 const MenuSingleItem = ({ menuItem }) => {
     const { id, name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
-    const pizzaCount = useSelector(state => state.pizza.some(pizza => pizza.id === id && pizza.count > 0));
-    console.log('deveta',pizzaCount)
+    
+    const pizzaInCart = useSelector(state => state.pizza.find(pizza => pizza.id === id));
+    const pizzaCount = pizzaInCart ? pizzaInCart.count : 0;
+    
     const dispatch = useDispatch();
     
     const handleAddPizza = () => {
@@ -29,7 +30,7 @@ const MenuSingleItem = ({ menuItem }) => {
                     <p className="menu-item-price">€{unitPrice.toFixed(2)}</p>
                 </div>
             </div>
-            {pizzaCount ? (
+            {pizzaCount > 0 ? (
                 <NumberPizza
                     pizzaCount={pizzaCount}
                     handleAddPizza={handleAddPizza}
@@ -43,6 +44,5 @@ const MenuSingleItem = ({ menuItem }) => {
         </div>
     );
 };
-
 
 export default MenuSingleItem;
