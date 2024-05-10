@@ -5,7 +5,7 @@ import { addPizza, removePizza } from "../store/NumberPizza";
 
 const MenuSingleItem = ({ menuItem }) => {
     const { id, name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
-    const pizzaCount = useSelector(state => state.pizza[id]?.count);
+    const pizzaCount = useSelector(state => state.pizza.some(pizza => pizza.id === id && pizza.count > 0));
     console.log('deveta',pizzaCount)
     const dispatch = useDispatch();
     
@@ -29,7 +29,7 @@ const MenuSingleItem = ({ menuItem }) => {
                     <p className="menu-item-price">€{unitPrice.toFixed(2)}</p>
                 </div>
             </div>
-            {pizzaCount > 0 ? (
+            {pizzaCount ? (
                 <NumberPizza
                     pizzaCount={pizzaCount}
                     handleAddPizza={handleAddPizza}
