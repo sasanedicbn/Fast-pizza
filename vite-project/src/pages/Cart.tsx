@@ -26,7 +26,7 @@ const Cart = () => {
                         {orderPizzas.map((pizza) => (
                             <div className="cart-details" key={pizza.id}>
                                 <ul>
-                                    <li>{pizza.count}<span>x</span> {pizza.name}</li>
+                                    <li>{pizza.count}<span>x</span> {pizza.name}.</li>
                                 </ul>
                                 <div className="cart-price-details">
                                     <span>${((pizza.count * pizza.unitPrice).toFixed(2))}</span>
@@ -39,7 +39,7 @@ const Cart = () => {
                             </div>
                         ))}
                         <div>
-                            <button className="custom-button">ORDER PIZZAS</button>
+                            <Link to={'/order/new'} className="custom-button">ORDER PIZZAS</Link>
                             <button className="custom-button clear-btn" onClick={handleClearCart}>CLEAR CART</button>
                         </div>
                     </>

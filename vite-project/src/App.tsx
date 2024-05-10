@@ -6,6 +6,7 @@ import Menu from './components/Menu';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import Cart from './pages/Cart';
+import Order from './pages/Order';
 
 function App() {
   const router = createBrowserRouter([
@@ -15,7 +16,8 @@ function App() {
       children: [
         { path: '/', element: <MainComponent /> },
         { path: '/menu', element: <Menu /> },
-        { path: '/cart', element: <Cart/>}
+        { path: '/cart', element: <Cart/>},
+        { path: '/order/new', element: <Order/>}
       ],
     },
   ]);
