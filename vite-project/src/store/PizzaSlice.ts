@@ -24,7 +24,7 @@ const pizzaSlice = createSlice({
         }
       },
       clearCart: (state) => {
-        state.splice(0, state.length)
+        state.length = []
       }
     }
   });
@@ -35,5 +35,6 @@ export const getTotalCartPizzas = (state:RootState) => {
 export const getTotalCartPrice = (state:RootState) => {
     return state.pizza.reduce((total,pizza) => total + (pizza.count * pizza.unitPrice), 0)
 }
+
 export const {addPizza, removePizza, clearCart} = pizzaSlice.actions;
 export default pizzaSlice.reducer;
