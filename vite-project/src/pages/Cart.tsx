@@ -7,14 +7,7 @@ const Cart = () => {
     const orderPizzas = useSelector(state => state.pizza);
     const dispatch = useDispatch()
     console.log(orderPizzas);
-    // const handleAddPizza = () => {
-    //     dispatch(addPizza(orderPizzas));
-    // };
-
-    const handleRemovePizza = () => {
-        dispatch(removePizza(orderPizzas));
-    };
-
+  
     return (
         <div>
                 <div  className="cart-container">
@@ -28,7 +21,7 @@ const Cart = () => {
                         <div>
                             <NumberPizza pizzaCount={pizza.count} handleAddPizza={() => dispatch(addPizza(pizza))
 }
-                            handleRemovePizza={handleRemovePizza }/>
+                            handleRemovePizza={() => dispatch(removePizza(pizza)) }/>
                         </div>
                     </div>
                     ))}
