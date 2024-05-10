@@ -10,7 +10,7 @@ const pizzaSlice = createSlice({
         const {id} = pizza
         const existingPizza = state.find(p => p.id === id)
         if(!existingPizza){
-            state.push({...piza, count: 1})
+            state.push({...pizza, count: 1})
         } else {
             existingPizza.count++
         }

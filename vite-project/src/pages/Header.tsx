@@ -6,7 +6,7 @@ const Header = () => {
     const name = useSelector(state => state.customer.customerName)
     const pizzaSlice = useSelector(state => state.pizza)
     console.log('hhh', pizzaSlice)
-    const showOrderBar = Object.values(pizzaSlice).reduce((total, pizza) => total + pizza.count, 0) >= 1;
+    const showOrderBar = pizzaSlice.some((pizzaSlice) => pizzaSlice.count >= 1) 
 
     return(
         <>
