@@ -16,11 +16,11 @@ const Cart = () => {
                     {orderPizzas.map((pizza) => (
                     <div className="cart-details" key={pizza.id}>
                         <ul>
-                            <li>{pizza.name}</li>
+                            <li>{pizza.count}<span>x</span> {pizza.name}</li>
                         </ul>
-                        <div>
-                            <NumberPizza pizzaCount={pizza.count} handleAddPizza={() => dispatch(addPizza(pizza))
-}
+                        <div className="cart-price-details">
+                            <span>${((pizza.count * pizza.unitPrice).toFixed(2))}</span>
+                            <NumberPizza pizzaCount={pizza.count} handleAddPizza={() => dispatch(addPizza(pizza))}
                             handleRemovePizza={() => dispatch(removePizza(pizza)) }/>
                         </div>
                     </div>

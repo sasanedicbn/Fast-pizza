@@ -293,6 +293,8 @@ body{
   color: black;
   cursor: pointer;
   margin-bottom: 35px;
+  font-size: 16px;
+  color: #3498db;
 }
 .clear-btn{
   background-color: #f3f3f3;
@@ -301,5 +303,17 @@ body{
 }
 .cart-name{
   font-size: 20px;
+  font-weight: bold;
+}
+.cart-details ul li {
+  font-size: 20px;
+  color:rgb(94, 90, 90);
+}
+.cart-price-details{
+  display: flex;
+  align-items: center;
+}
+.cart-price-details span{
+  margin-right: 20px;
   font-weight: bold;
 }
