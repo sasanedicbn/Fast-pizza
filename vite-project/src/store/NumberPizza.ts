@@ -3,23 +3,24 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const pizzaSlice = createSlice({
     name: 'pizza',
-    initialState: {},
+    initialState: [],
     reducers: {
-      addPizza: (state, action) => {
-        const pizza = action.payload;
+    addPizza: (state, action) => {
+        const pizza = action.payload
         const {id} = pizza
-        console.log(pizza)
-        if (!state[id]) {
-            console.log(state[id])
-          state[id] = {...pizza, count: 0}
+        const existingPizza = state.find(p => p.id === id)
+        if(!existingPizza){
+            state.push({...piza, count: 1})
+        } else {
+            existingPizza.count++
         }
-        state[id].count++;
-          },
+    },
 
       removePizza: (state, action) => {
-        const { id } = action.payload;
-        if (state[id] && state[id].count > 0) {
-          state[id].count--;
+        const {id} = action.payload
+        const existingPizza = state.find(p => p.id === id)
+        if(existingPizza && existingPizza.count > 0){
+            existingPizza.count--;
         }
       },
     }

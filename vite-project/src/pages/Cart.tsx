@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom"
 import NumberPizza from "../components/NumberPizza"
+import { useSelector } from "react-redux"
 
 const Cart = () => {
+    
     return(
         <div className="cart-container">
             <Link to='/menu' className="back-menu">← Back to menu</Link>
