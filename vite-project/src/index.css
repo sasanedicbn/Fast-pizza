@@ -271,6 +271,9 @@ body{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgb(233, 232, 232);
+  margin-top: 5px;
 }
 .cart-details ul li {
   list-style-type: none;
@@ -295,9 +298,6 @@ body{
   background-color: #f3f3f3;
   border: 1px solid grey;
   margin-left: 12px;
-}
-.cart-container:nth-child(2){
-  margin-top: 25px;
 }
 .cart-name{
   font-size: 20px;
