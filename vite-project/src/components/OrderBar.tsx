@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const OrderBar = () => {
     const pizzaState = useSelector(state => state.pizza)
      console.log('pizzaState', pizzaState)
-    const totalPizzas = Object.values(pizzaState).reduce((total, pizza) => total + pizza.count, 0)
-    const totalPrice = Object.values(pizzaState).reduce((total,pizza) => total + (pizza.count * pizza.unitPrice), 0)
+    const totalPizzas = pizzaState.reduce((total, pizza) => total + pizza.count, 0)
+    const totalPrice = pizzaState.reduce((total,pizza) => total + (pizza.count * pizza.unitPrice), 0)
     console.log(totalPrice)
  
     return(
