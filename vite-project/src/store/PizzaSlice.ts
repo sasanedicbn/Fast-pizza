@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from './store';
 
 
 const pizzaSlice = createSlice({
@@ -15,7 +16,6 @@ const pizzaSlice = createSlice({
             existingPizza.count++
         }
     },
-
       removePizza: (state, action) => {
         const {id} = action.payload
         const existingPizza = state.find(p => p.id === id)
@@ -23,12 +23,14 @@ const pizzaSlice = createSlice({
             existingPizza.count--;
         }
       },
-      clearCart: (state, action) => {
+      clearCart: (state) => {
         state.splice(0, state.length)
       }
     }
   });
   
-
+export const getTotalCartPrice = (state:RootState) =>{
+    return state.pizza.reduce((total, pizza) => total + pizza.count, 0)
+}
 export const {addPizza, removePizza, clearCart} = pizzaSlice.actions;
 export default pizzaSlice.reducer;

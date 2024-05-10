@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import CustomerSlice from "./CustomerSlice";
 import LoaderSlice from "./Global/GlobalLoaderSlice";
-import NumberPizza from "./NumberPizza";
+import NumberPizza from "./PizzaSlice";
 
 
 const store = configureStore({
@@ -11,6 +11,6 @@ const store = configureStore({
         pizza: NumberPizza,
     }
 })
-
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import NumberPizza from "../components/NumberPizza";
 import { useDispatch, useSelector } from "react-redux";
-import { addPizza, clearCart, removePizza } from "../store/NumberPizza";
+import { addPizza, clearCart, removePizza } from "../store/PizzaSlice";
 
 const Cart = () => {
     const orderPizzas = useSelector(state => state.pizza);
@@ -18,7 +18,7 @@ const Cart = () => {
             <div className="cart-container">
                 <Link to='/menu' className="back-menu">← Back to menu</Link>
                 {orderPizzas.length === 0 ? (
-                    <p className="empy-cart">Your cart is still empty. Start adding some pizzas.</p>
+                    <p className="empy-cart">Your cart is still empty. Start adding some pizzas :).</p>
                 ) : (
                     <>
                         <p className="cart-name">Your cart, name</p>

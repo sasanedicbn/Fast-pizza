@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import NumberPizza from "../components/NumberPizza";
-import { addPizza, removePizza } from "../store/NumberPizza";
+import { addPizza, removePizza } from "../store/PizzaSlice";
 
 const MenuSingleItem = ({ menuItem }) => {
     const { id, name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
@@ -47,3 +47,5 @@ const MenuSingleItem = ({ menuItem }) => {
 };
 
 export default MenuSingleItem;
+
+ 
