@@ -325,7 +325,7 @@ body{
 /* Order */
 .order-container {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 600px;
@@ -336,17 +336,19 @@ body{
 
 .order-container h2 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
 }
 
-.order-container form div {
+/* .order-container form div {
   margin-bottom: 15px;
-}
+
+} */
 
 .order-container label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  width: 140px;
 }
 
 .order-container input[type="text"] {
@@ -356,8 +358,8 @@ body{
   border-radius: 5px;
 }
 
-.order-container button {
- 
+.order-now{
+  width: 100%;
   padding: 10px 20px;
   background-color: #fad91f;
   color: rgb(49, 49, 49);
@@ -365,15 +367,17 @@ body{
   font-size: 18px;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 30px;
 }
+
 .btn-position{
  position: absolute;
  width: 100px;
 }
 
 .order-container input[type="checkbox"] {
-  margin-right: 10px;
-  width: 400px;
+  width: 20px;
+  height: 20px;
 }
 
 
@@ -388,5 +392,20 @@ body{
 }
 .order-container form div {
   display: flex;
-  justify-content: space-between;
+
+  align-items: center;
+}
+form div label:last-child{
+  width: 410px;
+ 
+}
+.error-message{
+  color:red;
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+  margin-bottom: 10px;
+}
+.priorityOrder{
+  margin-left: 10px;
 }
