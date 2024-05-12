@@ -1,4 +1,11 @@
+import {useForm} from 'react-hook-form'
 const Order = () => {
+    type FormFields ={
+        firstName:string,
+        phoneNumber:number,
+        location:string,
+    }
+    const form = useForm<FormFields>()
     return(
         <div className="order-container">
             <h2>Ready to order? Let's go!</h2>
