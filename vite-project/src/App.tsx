@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import Cart from './pages/Cart';
 import Order from './pages/Order';
+import OrderStatus from './pages/OrderStatus';
 
 function App() {
   const router = createBrowserRouter([
@@ -17,7 +18,8 @@ function App() {
         { path: '/', element: <MainComponent /> },
         { path: '/menu', element: <Menu /> },
         { path: '/cart', element: <Cart/>},
-        { path: '/order/new', element: <Order/>}
+        { path: '/order/new', element: <Order/>},
+        { path: '/order/:id', element: <OrderStatus/>}
       ],
     },
   ]);
