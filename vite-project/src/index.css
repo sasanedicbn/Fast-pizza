@@ -357,7 +357,7 @@ body{
 }
 
 .order-container button {
-  width: 100%;
+ 
   padding: 10px 20px;
   background-color: #fad91f;
   color: rgb(49, 49, 49);
@@ -370,14 +370,13 @@ body{
  position: absolute;
  width: 100px;
 }
-/* oko ovoga gore trebam da se bakcem da razdvojim btne */
 
 .order-container input[type="checkbox"] {
   margin-right: 10px;
   width: 400px;
 }
 
-/* Stilizacija za dodatni checkbox div */
+
 .order-container div:last-child {
   display: flex;
   align-items: center;

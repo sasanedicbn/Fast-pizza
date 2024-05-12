@@ -1,33 +1,39 @@
-import {useForm} from 'react-hook-form'
+import {useForm, SubmitHandler} from 'react-hook-form'
+
+type FormFields ={
+    firstName:string,
+    phoneNumber:number,
+    location:string,
+}
 const Order = () => {
-    type FormFields ={
-        firstName:string,
-        phoneNumber:number,
-        location:string,
+  
+    const {register, handleSubmit} = useForm<FormFields>()
+
+    const onSubmit: SubmitHandler<FormFields> = (data) => {
+        console.log(data)
     }
-    const form = useForm<FormFields>()
     return(
         <div className="order-container">
             <h2>Ready to order? Let's go!</h2>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" id="firstName" />
+                    <input {...register("firstName")} type="text" id="firstName" />
                 </div>
                 <div>
                     <label htmlFor="phoneNumber">Phone number</label>
-                    <input type="text" id="phoneNumber" />
+                    <input  {...register("phoneNumber")} type="text" id="phoneNumber" />
                 </div>
                 <div>
                     <label htmlFor="location">Location</label>
-                    <input type="text" id="location" />
+                    <input  {...register("location")} type="text" id="location" />
                     <button className="btn-position">Get Position</button>
                 </div>
                 <div>
                     <input type="checkbox" id="priorityOrder" />
                     <label htmlFor="priorityOrder">Want to give your order priority?</label>
                 </div>
-                <button>ORDER NOW FOR PRICE</button>
+                <button type='submit'>ORDER NOW FOR PRICE</button>
             </form>
         </div>
     )
