@@ -1,18 +1,21 @@
 import {useForm, SubmitHandler} from 'react-hook-form'
 import {z} from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'; 
-import OrderBar from '../components/OrderBar';
+import { useSelector } from 'react-redux';
+import { getTotalCartPrice } from '../store/PizzaSlice';
 
 
-const schema =  z.object({
-    firstName:z.string().min(1),
-    phoneNumber:z.string().min(6),
-    location:z.string().min(4),
-})
+const schema = z.object({
+    firstName: z.string().min(1).max(50), 
+    phoneNumber: z.number().min(4),
+    location: z.string().min(2).max(100), 
+    priorityOrder: z.boolean(), 
+});
+
 type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
-  
+    const totalPrice = useSelector(getTotalCartPrice)
     const {register, handleSubmit, formState: {errors}} = useForm<FormFields>({resolver: zodResolver(schema)})
 
     const onSubmit: SubmitHandler<FormFields> = (data) => {
@@ -30,7 +33,7 @@ const Order = () => {
                 <span className='error-message'>{errors.firstName?.message}</span>
                 <div>
                     <label htmlFor="phoneNumber">Phone number</label>
-                    <input  {...register("phoneNumber")} type="text" id="phoneNumber" />
+                    <input  {...register("phoneNumber",{valueAsNumber:true})} type="text" id="phoneNumber" />
                 </div>
                 <span className='error-message'>{errors.phoneNumber?.message}</span>
                 <div>
@@ -40,10 +43,11 @@ const Order = () => {
                 </div>
                 <span className='error-message'>{errors.location?.message}</span>
                 <div>
-                    <input type="checkbox" id="priorityOrder" />
-                    <label htmlFor="priorityOrder" className='priorityOrder'>Want to give your order priority?</label>
+                   <input type="checkbox" id="priorityOrder" {...register("priorityOrder")} />
+                     <label htmlFor="priorityOrder" className='priorityOrder'>Want to give your order priority?</label>
                 </div>
-                <button type='submit' className='order-now'>ORDER NOW FOR PRICE</button>
+                <span className='error-message'>{errors.priorityOrder?.message}</span>
+                <button type='submit' className='order-now'>ORDER NOW FOR ${totalPrice.toFixed(2)}</button>
             </form>
         </div>
     )

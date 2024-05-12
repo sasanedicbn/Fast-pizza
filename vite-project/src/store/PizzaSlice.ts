@@ -25,6 +25,9 @@ const pizzaSlice = createSlice({
       },
       clearCart: (state) => {
         state.length = []
+      },
+      orderPizzas: (state, action) => {
+        state.push(action.payload)
       }
     }
   });
