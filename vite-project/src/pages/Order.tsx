@@ -1,8 +1,11 @@
 import {useForm, SubmitHandler} from 'react-hook-form'
 import {z} from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'; 
-import { useSelector } from 'react-redux';
-import { getTotalCartPrice } from '../store/PizzaSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const schema = z.object({
@@ -15,12 +18,29 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
+    const { id } = useParams(); 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+   console.log(id)
+//    UNDEFINED MI JE ID JER NEMAM NA OVOME :ID ON JE NA ORDERSTATUS COMPOENNTI
+    const onSubmit:  SubmitHandler<FormFields> = async (formData) => {
+      try {
+        const response = await fetch(`http://localhost:5173/order/${id}`, { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+         dispatch(orderSuccess(response))
+         navigate(`/order/${id}`);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
     const totalPrice = useSelector(getTotalCartPrice)
     const {register, handleSubmit, formState: {errors}} = useForm<FormFields>({resolver: zodResolver(schema)})
 
-    const onSubmit: SubmitHandler<FormFields> = (data) => {
-        console.log(data)
-    }
     return(
         <div className="order-container">
             <h2>Ready to order? Let's go!</h2>
