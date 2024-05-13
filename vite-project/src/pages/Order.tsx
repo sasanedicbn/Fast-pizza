@@ -10,10 +10,10 @@ import { useEffect } from 'react';
 
 
 const schema = z.object({
-    firstName: z.string().min(1).max(50), 
-    phoneNumber: z.string().min(4),
-    location: z.string().min(2).max(100), 
-    priorityOrder: z.boolean(), 
+    customer: z.string().min(1).max(50), 
+    phone: z.string().min(4),
+    address: z.string().min(2).max(100), 
+    priority: z.boolean(), 
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -34,7 +34,23 @@ const onSubmit: SubmitHandler<FormFields> = async (formData) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify( formData),
+            body: JSON.stringify({
+                customer: formData.customer,
+                phone: formData.phone,
+                address: formData.address,
+                position: "",
+                priority: formData.priority,
+                cart: [
+                    {
+                        pizzaId: 1,
+                        name: "Margherita",
+                        quantity: 1,
+                        unitPrice: 12,
+                        totalPrice: 12
+                    }
+                ]
+            }
+            ),
         });
          console.log(response)
         if (!response.ok) {
@@ -59,27 +75,27 @@ const onSubmit: SubmitHandler<FormFields> = async (formData) => {
             <h2>Ready to order? Let's go!</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <label htmlFor="firstName">First Name</label>
-                    <input {...register("firstName")} type="text" id="firstName" />
+                    <label htmlFor="customer">First Name</label>
+                    <input {...register("customer")} type="text" id="customer" />
                    
                 </div>
-                <span className='error-message'>{errors.firstName?.message}</span>
+                <span className='error-message'>{errors.customer?.message}</span>
                 <div>
-                    <label htmlFor="phoneNumber">Phone number</label>
-                    <input  {...register("phoneNumber")} type="text" id="phoneNumber" />
+                    <label htmlFor="phone">Phone number</label>
+                    <input  {...register("phone")} type="text" id="phone" />
                 </div>
-                <span className='error-message'>{errors.phoneNumber?.message}</span>
+                <span className='error-message'>{errors.phone?.message}</span>
                 <div>
-                    <label htmlFor="location">Location</label>
-                    <input  {...register("location")} type="text" id="location" />
+                    <label htmlFor="address">Location</label>
+                    <input  {...register("address")} type="text" id="address" />
                     {/* <button className="btn-position">Get Position</button> */}
                 </div>
-                <span className='error-message'>{errors.location?.message}</span>
+                <span className='error-message'>{errors.address?.message}</span>
                 <div>
-                   <input type="checkbox" id="priorityOrder" {...register("priorityOrder")} />
-                     <label htmlFor="priorityOrder" className='priorityOrder'>Want to give your order priority?</label>
+                   <input type="checkbox" id="priority" {...register("priority")} />
+                     <label htmlFor="priority" className='priority'>Want to give your order priority?</label>
                 </div>
-                <span className='error-message'>{errors.priorityOrder?.message}</span>
+                <span className='error-message'>{errors.priority?.message}</span>
                 <button type='submit' className='order-now'>ORDER NOW FOR ${totalPrice.toFixed(2)}</button>
             </form>
         </div>
