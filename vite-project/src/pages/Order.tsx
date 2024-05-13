@@ -39,7 +39,7 @@ const onSubmit: SubmitHandler<FormFields> = async (formData) => {
                 phone: formData.phone,
                 address: formData.address,
                 position: "",
-                priority: formData.priority
+                priority: formData.priority,
                 cart: [
                     {
                         pizzaId: 1,
