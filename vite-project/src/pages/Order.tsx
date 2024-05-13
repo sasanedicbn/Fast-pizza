@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
 import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 
 const schema = z.object({
     firstName: z.string().min(1).max(50), 
-    phoneNumber: z.number().min(4),
+    phoneNumber: z.string().min(4),
     location: z.string().min(2).max(100), 
     priorityOrder: z.boolean(), 
 });
@@ -26,21 +27,24 @@ const Order = () => {
 
 
 const onSubmit: SubmitHandler<FormFields> = async (formData) => {
+    console.log(formData)
     try {
-        const response = await fetch(`http://react-fast-pizza-api.onrender.com/api/order`, {
+        const response = await fetch(`https://react-fast-pizza-api.onrender.com/api/order`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify( formData),
         });
-
+         console.log(response)
         if (!response.ok) {
             throw new Error('Error while submitting the form');
         }
 
         const responseData = await response.json();
+ 
 
+        dispatch(orderSuccess(responseData))
         navigate(`/order/${responseData.id}`);
     } catch (error) {
         console.error('Error:', error);
@@ -62,7 +66,7 @@ const onSubmit: SubmitHandler<FormFields> = async (formData) => {
                 <span className='error-message'>{errors.firstName?.message}</span>
                 <div>
                     <label htmlFor="phoneNumber">Phone number</label>
-                    <input  {...register("phoneNumber",{valueAsNumber:true})} type="text" id="phoneNumber" />
+                    <input  {...register("phoneNumber")} type="text" id="phoneNumber" />
                 </div>
                 <span className='error-message'>{errors.phoneNumber?.message}</span>
                 <div>
