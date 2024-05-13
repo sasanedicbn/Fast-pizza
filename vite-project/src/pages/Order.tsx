@@ -3,7 +3,7 @@ import {z} from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -18,26 +18,35 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
-    const { id } = useParams(); 
+    // const { id } = useParams(); 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-   console.log(id)
+//    console.log(id)
 //    UNDEFINED MI JE ID JER NEMAM NA OVOME :ID ON JE NA ORDERSTATUS COMPOENNTI
-    const onSubmit:  SubmitHandler<FormFields> = async (formData) => {
-      try {
-        const response = await fetch(`http://localhost:5173/order/${id}`, { 
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
+
+
+const onSubmit: SubmitHandler<FormFields> = async (formData) => {
+    try {
+        const response = await fetch(`http://react-fast-pizza-api.onrender.com/api/order`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
         });
-         dispatch(orderSuccess(response))
-         navigate(`/order/${id}`);
-      } catch (error) {
+
+        if (!response.ok) {
+            throw new Error('Error while submitting the form');
+        }
+
+        const responseData = await response.json();
+
+        navigate(`/order/${responseData.id}`);
+    } catch (error) {
         console.error('Error:', error);
-      }
-    };
+    }
+};
+
     const totalPrice = useSelector(getTotalCartPrice)
     const {register, handleSubmit, formState: {errors}} = useForm<FormFields>({resolver: zodResolver(schema)})
 
