@@ -4,9 +4,9 @@ import OrderBar from '../components/OrderBar';
 
 const Header = () => {
     const name = useSelector(state => state.customer.customerName)
-    const pizzaSlice = useSelector(state => state.pizza)
+    const pizzaSlice = useSelector(state => state.pizza.cart)
     console.log('hhh', pizzaSlice)
-    const showOrderBar = pizzaSlice.some((pizzaSlice) => pizzaSlice.count >= 1) 
+    const showOrderBar = pizzaSlice.some((pizza) => pizza.count >= 1) 
 
     return(
         <>

@@ -20,6 +20,8 @@ type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
     // const { id } = useParams(); 
+    const orders = useSelector(state => state.pizza)
+    console.log(orders)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 //    console.log(id)

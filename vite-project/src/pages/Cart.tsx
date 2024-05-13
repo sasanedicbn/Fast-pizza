@@ -23,7 +23,7 @@ const Cart = () => {
                 ) : (
                     <>
                         <p className="cart-name">Your cart, {customerName}</p>
-                        {orderPizzas.map((pizza) => (
+                        {orderPizzas.cart.map((pizza) => (
                             <div className="cart-details" key={pizza.id}>
                                 <ul>
                                     <li>{pizza.count}<span>x</span> {pizza.name}.</li>

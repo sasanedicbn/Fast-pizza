@@ -3,24 +3,24 @@ import { getName } from '../store/CustomerSlice';
 import { useState } from 'react';
 import {  useNavigate } from 'react-router-dom';
 import ContinueOrdering from '../components/ContinueOrdering';
-
+import { getTotalCartPizzas } from '../store/PizzaSlice'; 
 
 const MainComponent = () => {
-    const [userName, setUserName] = useState('')
-    const name = useSelector(state => state.customer.customerName)
+    const [userName, setUserName] = useState('');
+    const name = useSelector(state => state.customer.customerName);
+    const cartPizzasCount = useSelector(getTotalCartPizzas); 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleUserName = (event) => {
-        setUserName(event.target.value)
-    }
+        setUserName(event.target.value);
+    };
 
     const handleCustomerName = (event) => {
-        event.preventDefault()
-        dispatch(getName(userName)); 
-        navigate('/menu')
+        event.preventDefault();
+        dispatch(getName(userName));
+        navigate('/menu');
     };
-    console.log(userName)
 
     return (
         <div className="main-container">
@@ -37,6 +37,11 @@ const MainComponent = () => {
                 />}
                 { userName && <button type='submit' className='custom-button' value={name}>START ORDERING</button>}
             </form>
+            {cartPizzasCount > 0 && (
+                <div className="cart-summary">
+                    <p>You have {cartPizzasCount} {cartPizzasCount === 1 ? 'pizza' : 'pizzas'} in your cart.</p>
+                </div>
+            )}
         </div>
     );
 };
