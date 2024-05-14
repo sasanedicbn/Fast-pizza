@@ -4,7 +4,8 @@ import { RootState } from './store';
 const pizzaSlice = createSlice({
   name: 'pizza',
   initialState: {
-    cart: []
+    cart: [],
+    order:{}
   },
   reducers: {
     addPizza: (state, action) => {
