@@ -51,7 +51,8 @@ const Order = () => {
             const responseData = await response.json();
 
             dispatch(orderSuccess(responseData))
-            navigate(`/order/${responseData.id}`);
+            console.log(responseData)
+            navigate(`/order/${responseData.data.id}`);
         } catch (error) {
             console.error('Error:', error);
         }
