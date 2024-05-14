@@ -11,7 +11,6 @@ const OrderStatus = () => {
         const formattedDate = date.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
         return `Estimated delivery: ${formattedDate}`;
     };
-    
 
     return (
         <div className='container-orderStatus'>
@@ -24,7 +23,7 @@ const OrderStatus = () => {
             </div>
             <div className='order-time'>
                 <p>Only 30 minutes left</p>
-                <p>{order && order.data.estimatedDelivery}</p>
+                <p>({order && formatEstimatedDelivery(order.data.estimatedDelivery)})</p>
             </div>
             <div className='order-pizzas'>
                 {order && order.data.cart.map((pizza) => (
@@ -35,9 +34,9 @@ const OrderStatus = () => {
                 ))}
             </div>
             <div className='order-price'>
-               <p>Price per pizza: 212</p>
-               <p>Price for priority</p>
-               <p>To pay on delivery: €133.00</p>
+               <p>Price per pizza: ${order.data.orderPrice}</p>
+               <p>Price for priority: ${order.data.priorityPrice}</p>
+               <p>To pay on delivery: ${order.data.orderPrice + order.data.priorityPrice}</p>
              </div>
              <button className='order-priority'>MAKE PRIORITY</button>
         </div>
