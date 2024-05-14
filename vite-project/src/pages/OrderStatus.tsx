@@ -6,6 +6,12 @@ const OrderStatus = () => {
     console.log('ID', id);
     const order = useSelector(state => state.pizza.cart[state.pizza.cart.length - 1]);
     console.log('orderStatus', order);
+    const formatEstimatedDelivery = (estimatedDelivery) => {
+        const date = new Date(estimatedDelivery);
+        const formattedDate = date.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+        return `Estimated delivery: ${formattedDate}`;
+    };
+    
 
     return (
         <div className='container-orderStatus'>
@@ -18,7 +24,7 @@ const OrderStatus = () => {
             </div>
             <div className='order-time'>
                 <p>Only 30 minutes left</p>
-                <p>(Estimated delivery: May 14, 11:14 AM)</p>
+                <p>{order && order.data.estimatedDelivery}</p>
             </div>
             <div className='order-pizzas'>
                 {order && order.data.cart.map((pizza) => (

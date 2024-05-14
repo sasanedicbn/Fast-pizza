@@ -20,13 +20,12 @@ const Order = () => {
     const cart = useSelector(state => state.pizza.cart); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const totalPricer = useSelector(getTotalCartPrice);
-    
-    // Računanje dodatnog troška za prioritet
-    const priorityFee = isPriority ? totalPricer * 0.05 : 0;
+    const totalPrice = useSelector(getTotalCartPrice);
+   
+    const priorityFee = isPriority ? totalPrice * 0.09 : 0;
+   
+    const finalPrice = totalPrice + priorityFee;
 
-    // Konačna cijena
-    const finalPrice = totalPricer + priorityFee;
 
     const onSubmit: SubmitHandler<FormFields> = async (formData) => {
         try {
