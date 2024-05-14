@@ -409,11 +409,85 @@ form div label:last-child{
 .priorityOrder{
   margin-left: 10px;
 }
+/* OrderStatus */
 .container-orderStatus{
-  padding-top: 90px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding-top: 100px;
   flex-direction: column;
-  background-color: #3498db;
+  height: 100vh;
+}
+.order-status{
+  display: flex;
+  justify-content: space-between;
+  width: 55%;
+}
+.order-status p{
+  font-weight: bold;
+  font-size: 22px;
+}
+.order-status button {
+  display: inline-block;
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  background-color: rgb(29, 211, 29);
+  color: white;
+  border-radius: 9999px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.order-status button:nth-child(1){
+  background-color: rgb(226, 19, 19);
+}
+.order-time{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 55%;
+  margin:20px 0;
+  padding: 15px;
+  background-color: rgb(204, 203, 203);
+  font-size: 20px;
+}
+.order-time p:nth-child(2){
+  font-size: 14px;
+  font-style: italic;
+}
+.container-orderStatus .order-pizzas{
+  display: flex;
+  width: 55%;
+  height: 90px;
+}
+.order-pizza{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  background-color: rgb(29, 211, 29);
+  margin-right: 10px;
+  width: 150px;
+}
+.order-pizza p:nth-child(1){
+  padding-bottom: 40.5px;
+}
+.order-price{
+  margin-top: 20px;
+  background-color: rgb(204, 203, 203);
+  width: 55%;
+  padding: 10px;
+}
+.order-price p {
+  font-size: 18px;
+  color:rgb(53, 50, 50);
+}
+.order-price p:nth-child(3){
+  margin-top: 8px;
+  font-size: 20px;
+  color:black
 }

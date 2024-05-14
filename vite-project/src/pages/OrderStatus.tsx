@@ -10,9 +10,11 @@ const OrderStatus = () => {
     return (
         <div className='container-orderStatus'>
             <div className='order-status'>
-                <p>Order {id} status</p>
-                <button>PRIORITY</button>
-                <button>PREPARING ORDER</button>
+                <p>Order #{id} status</p>
+                <div>
+                 <button>PRIORITY</button>
+                 <button>PREPARING ORDER</button>
+                </div>
             </div>
             <div className='order-time'>
                 <p>Only 30 minutes left</p>
@@ -20,11 +22,9 @@ const OrderStatus = () => {
             </div>
             <div className='order-pizzas'>
                 {order && order.data.cart.map((pizza) => (
-                    <div key={pizza.id} className='order-pizza'>
-                        <div>
-                            <p>{pizza.quantity}X {pizza.name}</p>
+                    <div key={pizza.id} className='order-pizza'>  
+                            <p>{pizza.quantity}x {pizza.name}</p>
                             <p>Total Price: {pizza.totalPrice}</p>
-                        </div>
                     </div>
                 ))}
             </div>
