@@ -20,21 +20,21 @@ const Order = () => {
     const cart = useSelector(state => state.pizza.cart); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const totalPricer = useSelector(getTotalCartPrice)
+    const totalPricer = useSelector(getTotalCartPrice => isPriority ? getTotalCartPrice * 0.5 : getTotalCartPrice)
   console.log(totalPricer, 'order')
     
     function setPriorityhandler () {
         setPriority(prevState => !prevState)
     }
-    let priorityFee = 0
-    useEffect(() => {
-        if(isPriority) {
-            priorityFee =  totalPricer + 5
-        }
-    }, [isPriority])
+    // let priorityFee = 0
+    // useEffect(() => {
+    //     if(isPriority) {
+    //         priorityFee =  totalPricer + 5
+    //     }
+    // }, [isPriority])
     
-    console.log(priorityFee)
-    console.log(isPriority)
+    // console.log(priorityFee)
+    // console.log(isPriority)
 
     const onSubmit: SubmitHandler<FormFields> = async (formData) => {
         try {
