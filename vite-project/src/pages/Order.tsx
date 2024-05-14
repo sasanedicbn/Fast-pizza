@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const schema = z.object({
     customer: z.string().min(1).max(50), 
@@ -20,21 +20,13 @@ const Order = () => {
     const cart = useSelector(state => state.pizza.cart); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const totalPricer = useSelector(getTotalCartPrice => isPriority ? getTotalCartPrice * 0.5 : getTotalCartPrice)
-  console.log(totalPricer, 'order')
+    const totalPricer = useSelector(getTotalCartPrice);
     
-    function setPriorityhandler () {
-        setPriority(prevState => !prevState)
-    }
-    // let priorityFee = 0
-    // useEffect(() => {
-    //     if(isPriority) {
-    //         priorityFee =  totalPricer + 5
-    //     }
-    // }, [isPriority])
-    
-    // console.log(priorityFee)
-    // console.log(isPriority)
+    // Računanje dodatnog troška za prioritet
+    const priorityFee = isPriority ? totalPricer * 0.05 : 0;
+
+    // Konačna cijena
+    const finalPrice = totalPricer + priorityFee;
 
     const onSubmit: SubmitHandler<FormFields> = async (formData) => {
         try {
@@ -68,15 +60,12 @@ const Order = () => {
             const responseData = await response.json();
 
             dispatch(orderSuccess(responseData))
-            console.log(responseData)
             navigate(`/order/${responseData.data.id}`);
         } catch (error) {
             console.error('Error:', error);
         }
     };
 
-
-    const totalPrice = useSelector(getTotalCartPrice)
     const {register, handleSubmit, formState: {errors}} = useForm<FormFields>({resolver: zodResolver(schema)})
 
     return (
@@ -99,11 +88,11 @@ const Order = () => {
                 </div>
                 <span className='error-message'>{errors.address?.message}</span>
                 <div>
-                    <input type="checkbox" id="priority" {...register("priority")} onClick={setPriorityhandler} />
+                    <input type="checkbox" id="priority" {...register("priority")} onChange={() => setPriority(prevState => !prevState)} />
                     <label htmlFor="priority" className='priority'>Want to give your order priority?</label>
                 </div>
                 <span className='error-message'>{errors.priority?.message}</span>
-                <button type='submit' className='order-now'>ORDER NOW FOR ${totalPrice.toFixed(2)}</button>
+                <button type='submit' className='order-now'>ORDER NOW FOR ${finalPrice.toFixed(2)}</button>
             </form>
         </div>
     )
