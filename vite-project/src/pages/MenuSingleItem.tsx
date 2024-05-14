@@ -6,7 +6,7 @@ const MenuSingleItem = ({ menuItem }) => {
     const { id, name, ingredients, unitPrice, imageUrl, soldOut } = menuItem;
     
     const pizzaInCart = useSelector(state => state.pizza.cart.find(pizza => pizza.id === id));
-    console.log('pizzaincart', pizzaInCart)
+    // console.log('pizzaincart', pizzaInCart)
     const pizzaCount = pizzaInCart ? pizzaInCart.count : 0;
     
     const dispatch = useDispatch();

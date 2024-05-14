@@ -4,10 +4,10 @@ import { getTotalCartPizzas, getTotalCartPrice } from "../store/PizzaSlice";
 
 const OrderBar = () => {
     const pizzaState = useSelector(state => state.pizza)
-     console.log('pizzaState', pizzaState)
+    //  console.log('pizzaState', pizzaState)
     const totalPizzas = useSelector(getTotalCartPizzas)
     const totalPrice = useSelector(getTotalCartPrice)
-    console.log(totalPrice)
+    // console.log(totalPrice)
  
     return(
         <div className="orderbar-container">

@@ -5,7 +5,7 @@ import OrderBar from '../components/OrderBar';
 const Header = () => {
     const name = useSelector(state => state.customer.customerName)
     const pizzaSlice = useSelector(state => state.pizza.cart)
-    console.log('hhh', pizzaSlice)
+    // console.log('hhh', pizzaSlice)
     const showOrderBar = pizzaSlice.some((pizza) => pizza.count >= 1) 
 
     return(
@@ -18,7 +18,7 @@ const Header = () => {
             </ul>
         </nav>
         <Outlet/>
-         {showOrderBar && <OrderBar/>}
+         {showOrderBar && <OrderBar/> }
          </>
     )
 }

@@ -409,3 +409,11 @@ form div label:last-child{
 .priorityOrder{
   margin-left: 10px;
 }
+.container-orderStatus{
+  padding-top: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #3498db;
+}
