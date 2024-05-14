@@ -434,7 +434,7 @@ form div label:last-child{
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: background-color 0.3s ease;
-  background-color: rgb(29, 211, 29);
+  background-color: rgb(106, 236, 106);
   color: white;
   border-radius: 9999px;
   outline: none;
@@ -443,6 +443,7 @@ form div label:last-child{
 }
 .order-status button:nth-child(1){
   background-color: rgb(226, 19, 19);
+  margin-right: 10px;
 }
 .order-time{
   display: flex;
@@ -461,7 +462,10 @@ form div label:last-child{
 .container-orderStatus .order-pizzas{
   display: flex;
   width: 55%;
-  height: 90px;
+  height: 120px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(187, 184, 184);
+  border-top: 1px solid rgb(187, 184, 184);
 }
 .order-pizza{
   display: flex;
@@ -469,9 +473,10 @@ form div label:last-child{
   align-items: center;
   flex-direction: column;
   font-weight: bold;
-  background-color: rgb(29, 211, 29);
+  background-color: rgb(106, 236, 106);
   margin-right: 10px;
   width: 150px;
+  padding: 10px;
 }
 .order-pizza p:nth-child(1){
   padding-bottom: 40.5px;
@@ -490,4 +495,20 @@ form div label:last-child{
   margin-top: 8px;
   font-size: 20px;
   color:black
+}
+.order-priority{
+  margin-top: 20px;
+  display: inline-block;
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  background-color: #fad91f;
+  color: black;
+  border-radius: 9999px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }

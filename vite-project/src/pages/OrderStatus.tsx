@@ -29,10 +29,11 @@ const OrderStatus = () => {
                 ))}
             </div>
             <div className='order-price'>
-              <p>Price per pizza: 212</p>
-              <p>Price for priority</p>
-              <p>To pay on delivery: €133.00</p>
+               <p>Price per pizza: 212</p>
+               <p>Price for priority</p>
+               <p>To pay on delivery: €133.00</p>
              </div>
+             <button className='order-priority'>MAKE PRIORITY</button>
         </div>
     );
 };
