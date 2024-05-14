@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const schema = z.object({
     customer: z.string().min(1).max(50), 
@@ -15,9 +16,25 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
+    const [isPriority, setPriority] = useState(false)
     const cart = useSelector(state => state.pizza.cart); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const totalPricer = useSelector(getTotalCartPrice)
+  console.log(totalPricer, 'order')
+    
+    function setPriorityhandler () {
+        setPriority(prevState => !prevState)
+    }
+    let priorityFee = 0
+    useEffect(() => {
+        if(isPriority) {
+            priorityFee =  totalPricer + 5
+        }
+    }, [isPriority])
+    
+    console.log(priorityFee)
+    console.log(isPriority)
 
     const onSubmit: SubmitHandler<FormFields> = async (formData) => {
         try {
@@ -39,7 +56,7 @@ const Order = () => {
                     phone: formData.phone,
                     address: formData.address,
                     position: "",
-                    priority: formData.priority,
+                    priority: isPriority,
                     cart: formattedCart,
                 }),
             });
@@ -57,6 +74,7 @@ const Order = () => {
             console.error('Error:', error);
         }
     };
+
 
     const totalPrice = useSelector(getTotalCartPrice)
     const {register, handleSubmit, formState: {errors}} = useForm<FormFields>({resolver: zodResolver(schema)})
@@ -81,7 +99,7 @@ const Order = () => {
                 </div>
                 <span className='error-message'>{errors.address?.message}</span>
                 <div>
-                    <input type="checkbox" id="priority" {...register("priority")} />
+                    <input type="checkbox" id="priority" {...register("priority")} onClick={setPriorityhandler} />
                     <label htmlFor="priority" className='priority'>Want to give your order priority?</label>
                 </div>
                 <span className='error-message'>{errors.priority?.message}</span>
