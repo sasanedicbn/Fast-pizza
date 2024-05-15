@@ -6,13 +6,22 @@ const OrderStatus = () => {
     console.log('ID', id);
     const order = useSelector(state => state.pizza.cart[state.pizza.cart.length - 1]);
     console.log('orderStatus', order);
+
     const formatEstimatedDelivery = (estimatedDelivery) => {
         const date = new Date(estimatedDelivery);
-        console.log(date)
+        // console.log(date)
         const formattedDate = date.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
         console.log(formattedDate)
         return `Estimated delivery: ${formattedDate}`;
     };
+    
+    const calculateRemainingMinutes = (createdOrder) => {
+        const now = new Date()
+        const deliveryTime = new Date(createdOrder)
+        const differenceinMilles = now - deliveryTime;
+        const differenceInMinutes = Math.ceil(differenceinMilles / 60000);
+        return differenceInMinutes
+    }
 
 
     return (
@@ -25,7 +34,7 @@ const OrderStatus = () => {
                 </div>
             </div>
             <div className='order-time'>
-                <p>Only 30 minutes left</p>
+                <p>Only {order && calculateRemainingMinutes(order.data.createdAt)} minutes left</p>
                 <p>({order && formatEstimatedDelivery(order.data.estimatedDelivery)})</p>
             </div>
             <div className='order-pizzas'>
