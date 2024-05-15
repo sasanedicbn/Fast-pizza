@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 
 const OrderStatus = () => {
     const { id } = useParams();
-    console.log('ID', id);
     const order = useSelector(state => state.pizza.cart[state.pizza.cart.length - 1]);
-    console.log('orderStatus', order);
+   
 
     const formatEstimatedDelivery = (estimatedDelivery) => {
         const date = new Date(estimatedDelivery);
@@ -16,7 +15,6 @@ const OrderStatus = () => {
             minute: 'numeric', 
             hour12: true 
         });
-        console.log('Formatted Date:', formattedDate);
         return `Estimated delivery: ${formattedDate}`;
     };
 
