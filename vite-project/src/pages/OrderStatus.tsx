@@ -8,9 +8,12 @@ const OrderStatus = () => {
     console.log('orderStatus', order);
     const formatEstimatedDelivery = (estimatedDelivery) => {
         const date = new Date(estimatedDelivery);
+        console.log(date)
         const formattedDate = date.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+        console.log(formattedDate)
         return `Estimated delivery: ${formattedDate}`;
     };
+
 
     return (
         <div className='container-orderStatus'>
@@ -29,7 +32,7 @@ const OrderStatus = () => {
                 {order && order.data.cart.map((pizza) => (
                     <div key={pizza.id} className='order-pizza'>  
                             <p>{pizza.quantity}x {pizza.name}</p>
-                            <p>Total Price: {pizza.totalPrice}</p>
+                            <p>Total Price: ${pizza.totalPrice}</p>
                     </div>
                 ))}
             </div>

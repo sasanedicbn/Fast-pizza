@@ -474,10 +474,11 @@ form div label:last-child{
   align-items: center;
   flex-direction: column;
   font-weight: bold;
-  background-color: rgb(106, 236, 106);
+  background-color: rgb(241, 245, 241);
   margin-right: 10px;
   width: 150px;
   padding: 10px;
+  border: 1px solid #fad91f;
 }
 .order-pizza p:nth-child(1){
   padding-bottom: 40.5px;

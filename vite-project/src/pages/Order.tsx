@@ -22,7 +22,7 @@ const Order = () => {
     const navigate = useNavigate();
     const totalPrice = useSelector(getTotalCartPrice);
    
-    const priorityFee = isPriority ? totalPrice * 0.09 : 0;
+    const priorityFee = isPriority ? totalPrice * 0.05 : 0;
    
     const finalPrice = totalPrice + priorityFee;
 
