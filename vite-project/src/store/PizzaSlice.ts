@@ -5,6 +5,7 @@ const pizzaSlice = createSlice({
   name: 'pizza',
   initialState: {
     cart: [],
+    order: null,
   },
   reducers: {
     addPizza: (state, action) => {
@@ -29,7 +30,10 @@ const pizzaSlice = createSlice({
     },
     orderSuccess: (state, action) => {
       state.cart.push(action.payload);
-    }
+    },
+    setOrder(state, action) {
+      state.order = action.payload; 
+  },
   }
 });
 
