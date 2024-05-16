@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { togglePriority } from '../store/CustomerSlice';
 
 const schema = z.object({
