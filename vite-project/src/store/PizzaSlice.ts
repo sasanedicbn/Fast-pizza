@@ -45,5 +45,5 @@ export const getTotalCartPrice = (state: RootState) => {
   return state.pizza.cart.reduce((total, pizza) => total + (pizza.count * pizza.unitPrice), 0);
 };
 
-export const { addPizza, removePizza, clearCart, orderSuccess } = pizzaSlice.actions;
+export const { addPizza, removePizza, clearCart, orderSuccess, setOrder } = pizzaSlice.actions;
 export default pizzaSlice.reducer;
