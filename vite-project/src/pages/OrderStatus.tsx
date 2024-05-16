@@ -1,14 +1,35 @@
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { togglePriority } from '../store/CustomerSlice';
-import { useEffect, useState } from 'react';
+import { setOrder } from '../store/PizzaSlice'; 
 
 const OrderStatus = () => {
-    const dispatch = useDispatch();
-    const { id } = useParams();
-    const order = useSelector(state => state.pizza.order); // Dohvaćanje narudžbe iz Redux store-a
-    const priority = useSelector(state => state.customer.priority);
-    const [priorityPrice, setPriorityPrice] = useState(0);
+    const dispatch = useDispatch(); 
+    const { id } = useParams(); 
+    const order = useSelector((state) => state.pizza.order); 
+    console.log(order)
+    const priority = useSelector((state) => state.customer.priority); 
+    const [priorityPrice, setPriorityPrice] = useState(0); 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`https://react-fast-pizza-api.onrender.com/api/order/${id}`);
+                if (!response.ok) {
+                    throw new Error('Error while fetching order');
+                }
+                const responseData = await response.json();
+                dispatch(setOrder(responseData.data));
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        if (!order) {
+            fetchData();
+        }
+    }, [dispatch, id, order]); 
 
     useEffect(() => {
         if (order) {
@@ -17,7 +38,8 @@ const OrderStatus = () => {
         }
     }, [priority, order]);
 
-    const formatEstimatedDelivery = (estimatedDelivery) => {
+   
+    const formatEstimatedDelivery = (estimatedDelivery: string) => {
         const date = new Date(estimatedDelivery);
         const formattedDate = date.toLocaleString('en-US', { 
             month: 'short', 
@@ -29,7 +51,7 @@ const OrderStatus = () => {
         return `Estimated delivery: ${formattedDate}`;
     };
 
-    const calculateRemainingMinutes = (estimatedDelivery) => {
+    const calculateRemainingMinutes = (estimatedDelivery: string) => {
         const now = new Date();
         const deliveryTime = new Date(estimatedDelivery);
         const differenceInMillis = deliveryTime - now;
@@ -41,10 +63,9 @@ const OrderStatus = () => {
         return differenceInMinutes;
     };
 
-    if (!order) {
-        return <div>Loading...</div>;
-    }
+   
 
+    // Prikaz podataka o narudžbi
     return (
         <div className='container-orderStatus'>
             <div className='order-status'>
