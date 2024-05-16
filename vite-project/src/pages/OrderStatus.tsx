@@ -23,7 +23,6 @@ const OrderStatus = () => {
         const deliveryTime = new Date(estimatedDelivery);
         const differenceInMillis = deliveryTime - now;
         const differenceInMinutes = Math.ceil(differenceInMillis / 60000);
-        console.log('Remaining Minutes:', differenceInMinutes);
         return differenceInMinutes;
     };
 

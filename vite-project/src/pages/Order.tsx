@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { togglePriority } from '../store/CustomerSlice';
 
 const schema = z.object({
     customer: z.string().min(1).max(50), 
@@ -16,13 +17,15 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
-    const [isPriority, setPriority] = useState(false)
+    // const [isPriority, setPriority] = useState(false)
     const cart = useSelector(state => state.pizza.cart); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const totalPrice = useSelector(getTotalCartPrice);
+    const priority = useSelector(state => state.customer.priority)
+    console.log('PR', priority)
    
-    const priorityFee = isPriority ? totalPrice * 0.05 : 0;
+    const priorityFee = priority ? totalPrice * 0.05 : 0;
    
     const finalPrice = totalPrice + priorityFee;
 
@@ -47,7 +50,7 @@ const Order = () => {
                     phone: formData.phone,
                     address: formData.address,
                     position: "",
-                    priority: isPriority,
+                    priority: priority,
                     cart: formattedCart,
                 }),
             });
@@ -87,7 +90,7 @@ const Order = () => {
                 </div>
                 <span className='error-message'>{errors.address?.message}</span>
                 <div>
-                    <input type="checkbox" id="priority" {...register("priority")} onChange={() => setPriority(prevState => !prevState)} />
+                    <input type="checkbox" id="priority" {...register("priority")} onChange={(e) => dispatch(togglePriority(e.target.checked))} />
                     <label htmlFor="priority" className='priority'>Want to give your order priority?</label>
                 </div>
                 <span className='error-message'>{errors.priority?.message}</span>
