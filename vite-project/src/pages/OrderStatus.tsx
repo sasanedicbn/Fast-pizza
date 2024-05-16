@@ -1,45 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { togglePriority } from '../store/CustomerSlice';
-import { setOrder } from '../store/PizzaSlice'; 
+import { useEffect, useState } from 'react';
 
 const OrderStatus = () => {
-    const dispatch = useDispatch(); 
-    const { id } = useParams(); 
-    const order = useSelector((state) => state.pizza.order); 
-    console.log(order)
-    const priority = useSelector((state) => state.customer.priority); 
-    const [priorityPrice, setPriorityPrice] = useState(0); 
+    const { id } = useParams();
+    const order = useSelector(state => state.pizza.cart[state.pizza.cart.length - 1]);
+    const priority = useSelector(state => state.customer.priority);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`https://react-fast-pizza-api.onrender.com/api/order/${id}`);
-                if (!response.ok) {
-                    throw new Error('Error while fetching order');
-                }
-                const responseData = await response.json();
-                dispatch(setOrder(responseData.data));
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        };
+    // Lokalno stanje za prioritetnu cenu
+    const [priorityPrice, setPriorityPrice] = useState(0);
 
-        if (!order) {
-            fetchData();
-        }
-    }, [dispatch, id, order]); 
-
+    // Ažuriranje prioritetne cene kada se `priority` stanje promeni
     useEffect(() => {
         if (order) {
-            const newPriorityPrice = priority ? order.orderPrice * 0.05 : 0;
+            const newPriorityPrice = priority ? order.data.orderPrice * 0.05 : 0;
             setPriorityPrice(newPriorityPrice);
         }
     }, [priority, order]);
 
-   
-    const formatEstimatedDelivery = (estimatedDelivery: string) => {
+    const formatEstimatedDelivery = (estimatedDelivery) => {
         const date = new Date(estimatedDelivery);
         const formattedDate = date.toLocaleString('en-US', { 
             month: 'short', 
@@ -51,21 +32,16 @@ const OrderStatus = () => {
         return `Estimated delivery: ${formattedDate}`;
     };
 
-    const calculateRemainingMinutes = (estimatedDelivery: string) => {
+    const calculateRemainingMinutes = (estimatedDelivery) => {
         const now = new Date();
         const deliveryTime = new Date(estimatedDelivery);
         const differenceInMillis = deliveryTime - now;
         const differenceInMinutes = Math.ceil(differenceInMillis / 60000);
-        if (priority) {
-            const speedUpOrder = differenceInMinutes - 7;
-            return speedUpOrder;
-        }
         return differenceInMinutes;
     };
 
-   
+    console.log(priority);
 
-    // Prikaz podataka o narudžbi
     return (
         <div className='container-orderStatus'>
             <div className='order-status'>
@@ -76,13 +52,15 @@ const OrderStatus = () => {
                 </div>
             </div>
             <div className='order-time'>
-                <>
-                    <p>Only {calculateRemainingMinutes(order.estimatedDelivery)} minutes left</p>
-                    <p>({formatEstimatedDelivery(order.estimatedDelivery)})</p>
-                </>
+                {order && (
+                    <>
+                        <p>Only {calculateRemainingMinutes(order.data.estimatedDelivery)} minutes left</p>
+                        <p>({formatEstimatedDelivery(order.data.estimatedDelivery)})</p>
+                    </>
+                )}
             </div>
             <div className='order-pizzas'>
-                {order.cart.map((pizza) => (
+                {order && order.data.cart.map((pizza) => (
                     <div key={pizza.id} className='order-pizza'>  
                         <p>{pizza.quantity}x {pizza.name}</p>
                         <p>Total Price: ${pizza.totalPrice}</p>
@@ -90,11 +68,13 @@ const OrderStatus = () => {
                 ))}
             </div>
             <div className='order-price'>
-                <>
-                    <p>Price per pizza: ${order.orderPrice}</p>
-                    {priority && <p>Price for priority: ${priorityPrice.toFixed(2)}</p>}
-                    <p>To pay on delivery: ${(order.orderPrice + priorityPrice).toFixed(2)}</p>
-                </>
+                {order && (
+                    <>
+                        <p>Price per pizza: ${order.data.orderPrice}</p>
+                        {priority && <p>Price for priority: ${priorityPrice.toFixed(2)}</p>}
+                        <p>To pay on delivery: ${(order.data.orderPrice + priorityPrice).toFixed(2)}</p>
+                    </>
+                )}
             </div>
             {!priority && (
                 <button 

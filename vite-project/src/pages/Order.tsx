@@ -16,7 +16,6 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
-    // const [isPriority, setPriority] = useState(false)
     const cart = useSelector(state => state.pizza.cart); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
