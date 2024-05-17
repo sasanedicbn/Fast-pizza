@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTotalCartPrice, orderSuccess } from '../store/PizzaSlice';
 import { useNavigate } from 'react-router-dom';
 import { togglePriority } from '../store/CustomerSlice';
+import { RootState } from '../store/store';
 
 const schema = z.object({
     customer: z.string().min(1).max(50), 
@@ -16,11 +17,11 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Order = () => {
-    const cart = useSelector(state => state.pizza.cart); 
+    const cart = useSelector((state:RootState) => state.pizza.cart); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const totalPrice = useSelector(getTotalCartPrice);
-    const priority = useSelector(state => state.customer.priority)
+    const priority = useSelector((state:RootState) => state.customer.priority)
     console.log('PR', priority)
    
     const priorityFee = priority ? totalPrice * 0.05 : 0;
