@@ -2,13 +2,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { togglePriority } from '../store/CustomerSlice';
 import { useEffect, useState } from 'react';
+import { RootState } from '../store/store';
+
+interface PizzaData {
+  id: string;
+  name: string;
+  quantity: number;
+  totalPrice: number;
+}
+
+interface OrderData {
+  orderPrice: number;
+  estimatedDelivery: string;
+  cart: PizzaData[];
+}
 
 const OrderStatus = () => {
-    const { id } = useParams();
-    const priority = useSelector(state => state.customer.priority);
+    const { id } = useParams<{ id: string }>(); // Tipizujemo id kao string
+    const priority = useSelector((state: RootState) => state.customer.priority);
     const dispatch = useDispatch();
-    const [priorityPrice, setPriorityPrice] = useState(0);
-    const [order, setOrder] = useState(null);
+    const [priorityPrice, setPriorityPrice] = useState<number>(0); // Tipizujemo priorityPrice kao number
+    const [order, setOrder] = useState<OrderData | null>(null); // Tipizujemo order kao OrderData ili null
 
     useEffect(() => {
         const fetchOrder = async () => {
@@ -17,9 +31,9 @@ const OrderStatus = () => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch order');
                 }
-                const data = await response.json();
-                console.log('data',data)
-                setOrder(data);
+                const data: { data: OrderData } = await response.json(); // Tipizujemo podatke koje dobijamo kao OrderData
+                console.log('data', data);
+                setOrder(data.data); // Postavljamo podatke u stanje
             } catch (error) {
                 console.error('Error fetching order:', error);
             }
@@ -30,12 +44,12 @@ const OrderStatus = () => {
 
     useEffect(() => {
         if (order) {
-            const newPriorityPrice = priority ? order.data.orderPrice * 0.05 : 0;
+            const newPriorityPrice = priority ? order.orderPrice * 0.05 : 0; // Prilagođavamo korišćenje podataka prema tipizaciji
             setPriorityPrice(newPriorityPrice);
         }
     }, [priority, order]);
 
-    const formatEstimatedDelivery = (estimatedDelivery) => {
+    const formatEstimatedDelivery = (estimatedDelivery: string) => {
         const date = new Date(estimatedDelivery);
         const formattedDate = date.toLocaleString('en-US', { 
             month: 'short', 
@@ -47,10 +61,10 @@ const OrderStatus = () => {
         return `Estimated delivery: ${formattedDate}`;
     };
 
-    const calculateRemainingMinutes = (estimatedDelivery) => {
+    const calculateRemainingMinutes = (estimatedDelivery: string) => {
         const now = new Date();
         const deliveryTime = new Date(estimatedDelivery);
-        const differenceInMillis = deliveryTime - now;
+        const differenceInMillis = deliveryTime.getTime() - now.getTime(); // Promenjen način računanja razlike
         const differenceInMinutes = Math.ceil(differenceInMillis / 60000);
         return differenceInMinutes;
     };
@@ -67,13 +81,13 @@ const OrderStatus = () => {
             <div className='order-time'>
                 {order && (
                     <>
-                        <p>Only {calculateRemainingMinutes(order.data.estimatedDelivery)} minutes left</p>
-                        <p>({formatEstimatedDelivery(order.data.estimatedDelivery)})</p>
+                        <p>Only {calculateRemainingMinutes(order.estimatedDelivery)} minutes left</p>
+                        <p>({formatEstimatedDelivery(order.estimatedDelivery)})</p>
                     </>
                 )}
             </div>
             <div className='order-pizzas'>
-                {order && order.data.cart.map((pizza) => (
+                {order && order.cart.map((pizza) => (
                     <div key={pizza.id} className='order-pizza'>  
                         <p>{pizza.quantity}x {pizza.name}</p>
                         <p>Total Price: ${pizza.totalPrice}</p>
@@ -83,9 +97,9 @@ const OrderStatus = () => {
             <div className='order-price'>
                 {order && (
                     <>
-                        <p>Price per pizza: ${order.data.orderPrice}</p>
+                        <p>Price per pizza: ${order.orderPrice}</p>
                         {priority && <p>Price for priority: ${priorityPrice.toFixed(2)}</p>}
-                        <p>To pay on delivery: ${(order.data.orderPrice + priorityPrice).toFixed(2)}</p>
+                        <p>To pay on delivery: ${(order.orderPrice + priorityPrice).toFixed(2)}</p>
                     </>
                 )}
             </div>
