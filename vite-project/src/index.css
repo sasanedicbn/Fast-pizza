@@ -186,6 +186,21 @@ body{
   text-transform: uppercase;
   cursor: pointer;
 }
+.btn-location{
+  display: block;
+  width: 140px;
+  height: 35px;
+  padding: 4px;
+  border: none;
+  background-color: orange;
+  color: rgb(63, 61, 61);
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 14px;
+  
+  margin-left: -140px;
+}
 
 .menu-item-button.sold-out {
   background-color: #ccc;
