@@ -1,38 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import OrderBar from '../components/OrderBar';
 import { Link } from 'react-router-dom';
-import { setOrder } from '../store/PizzaSlice';
 
 const Header = () => {
     const name = useSelector(state => state.customer.customerName);
     const pizzaSlice = useSelector(state => state.pizza.cart);
     const showOrderBar = pizzaSlice.some((pizza) => pizza.count >= 1);
     const navigate = useNavigate(); 
-    const dispatch = useDispatch()
-
-    const fetchOrder = async (id) => {
-        try {
-            const response = await fetch(`https://react-fast-pizza-api.onrender.com/api/order/${id}`);
-            if (!response.ok) {
-                throw new Error('Error while submitting the form');
-            }
-            const responseData = await response.json();
-            console.log(responseData)
-            dispatch(setOrder(responseData.data))
-            navigate(`/order/${id}`);
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
 
     const handleSearch = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const orderId = event.target.orderId.value;
 
         if (orderId) {
-            fetchOrder(orderId)
+            navigate(`/order/${orderId}`);
         }
     };
 
