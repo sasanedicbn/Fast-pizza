@@ -1,22 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getName } from '../store/CustomerSlice';
-import { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ContinueOrdering from '../components/ContinueOrdering';
-import { getTotalCartPizzas } from '../store/PizzaSlice'; 
+import { getTotalCartPizzas } from '../store/PizzaSlice';
+import { RootState, AppDispatch } from '../store/Global';
 
 const MainComponent = () => {
-    const [userName, setUserName] = useState('');
-    const name = useSelector(state => state.customer.customerName);
-    const cartPizzasCount = useSelector(getTotalCartPizzas); 
-    const dispatch = useDispatch();
+    const [userName, setUserName] = useState<string>('');
+    const name = useSelector((state: RootState) => state.customer.customerName);
+    const cartPizzasCount = useSelector(getTotalCartPizzas);
+    const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleUserName = (event) => {
+    const handleUserName = (event: ChangeEvent<HTMLInputElement>) => {
         setUserName(event.target.value);
     };
 
-    const handleCustomerName = (event) => {
+    const handleCustomerName = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(getName(userName));
         navigate('/menu');
@@ -33,9 +34,9 @@ const MainComponent = () => {
                     className="input-field"
                     placeholder="Your full name"
                     value={userName}
-                    onChange={handleUserName} 
+                    onChange={handleUserName}
                 />}
-                { userName && <button type='submit' className='custom-button' value={name}>START ORDERING</button>}
+                { userName && <button type='submit' className='custom-button'>START ORDERING</button>}
             </form>
             {cartPizzasCount > 0 && (
                 <div className="cart-summary">
