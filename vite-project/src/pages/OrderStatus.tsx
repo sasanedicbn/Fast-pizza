@@ -5,14 +5,29 @@ import { useEffect, useState } from 'react';
 
 const OrderStatus = () => {
     const { id } = useParams();
-    const order = useSelector(state => state.pizza.cart[state.pizza.cart.length - 1]);
     const priority = useSelector(state => state.customer.priority);
     const dispatch = useDispatch();
-
-    // Lokalno stanje za prioritetnu cenu
     const [priorityPrice, setPriorityPrice] = useState(0);
+    const [order, setOrder] = useState(null);
 
-    // Ažuriranje prioritetne cene kada se `priority` stanje promeni
+    useEffect(() => {
+        const fetchOrder = async () => {
+            try {
+                const response = await fetch(`https://react-fast-pizza-api.onrender.com/api/order/${id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch order');
+                }
+                const data = await response.json();
+                console.log('data',data)
+                setOrder(data);
+            } catch (error) {
+                console.error('Error fetching order:', error);
+            }
+        };
+
+        fetchOrder();
+    }, [id]);
+
     useEffect(() => {
         if (order) {
             const newPriorityPrice = priority ? order.data.orderPrice * 0.05 : 0;
@@ -39,8 +54,6 @@ const OrderStatus = () => {
         const differenceInMinutes = Math.ceil(differenceInMillis / 60000);
         return differenceInMinutes;
     };
-
-    console.log(priority);
 
     return (
         <div className='container-orderStatus'>
