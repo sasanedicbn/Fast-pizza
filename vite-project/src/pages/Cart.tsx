@@ -6,9 +6,7 @@ import { addPizza, clearCart, removePizza } from "../store/PizzaSlice";
 const Cart = () => {
     const orderPizzas = useSelector(state => state.pizza);
     const customerName = useSelector(state => state.customer.customerName)
-    // console.log('customer', customerName)
     const dispatch = useDispatch();
-    // console.log(orderPizzas);
 
     function handleClearCart() {
         dispatch(clearCart());
