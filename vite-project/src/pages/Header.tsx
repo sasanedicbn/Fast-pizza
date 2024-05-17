@@ -2,22 +2,23 @@ import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import OrderBar from '../components/OrderBar';
 import { Link } from 'react-router-dom';
+import { RootState } from '../store/store';
+import { FormEvent } from 'react';
 
 const Header = () => {
-    const name = useSelector(state => state.customer.customerName);
-    const pizzaSlice = useSelector(state => state.pizza.cart);
+    const name = useSelector((state:RootState) => state.customer.customerName);
+    const pizzaSlice = useSelector((state:RootState) => state.pizza.cart);
     const showOrderBar = pizzaSlice.some((pizza) => pizza.count >= 1);
     const navigate = useNavigate(); 
 
-    const handleSearch = (event) => {
+    const handleSearch = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const orderId = event.target.orderId.value;
+        const orderId = (event.currentTarget.elements.namedItem('orderId') as HTMLInputElement).value;
 
         if (orderId) {
             navigate(`/order/${orderId}`);
         }
     };
-
     return (
         <>
             <nav className="nav-bar">

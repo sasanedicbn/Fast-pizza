@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import NumberPizza from "../components/NumberPizza";
 import { useDispatch, useSelector } from "react-redux";
 import { addPizza, clearCart, removePizza } from "../store/PizzaSlice";
-import { RootState, AppDispatch } from "../store";
+import { RootState, AppDispatch } from "../store/store";
 import { Pizza } from "../types";
 
 const Cart = () => {

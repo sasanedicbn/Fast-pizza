@@ -18,11 +18,11 @@ interface OrderData {
 }
 
 const OrderStatus = () => {
-    const { id } = useParams<{ id: string }>(); // Tipizujemo id kao string
+    const { id } = useParams<{ id: string }>(); 
     const priority = useSelector((state: RootState) => state.customer.priority);
     const dispatch = useDispatch();
-    const [priorityPrice, setPriorityPrice] = useState<number>(0); // Tipizujemo priorityPrice kao number
-    const [order, setOrder] = useState<OrderData | null>(null); // Tipizujemo order kao OrderData ili null
+    const [priorityPrice, setPriorityPrice] = useState<number>(0); 
+    const [order, setOrder] = useState<OrderData | null>(null);
 
     useEffect(() => {
         const fetchOrder = async () => {
@@ -31,9 +31,9 @@ const OrderStatus = () => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch order');
                 }
-                const data: { data: OrderData } = await response.json(); // Tipizujemo podatke koje dobijamo kao OrderData
+                const data: { data: OrderData } = await response.json(); 
                 console.log('data', data);
-                setOrder(data.data); // Postavljamo podatke u stanje
+                setOrder(data.data); 
             } catch (error) {
                 console.error('Error fetching order:', error);
             }
@@ -44,7 +44,7 @@ const OrderStatus = () => {
 
     useEffect(() => {
         if (order) {
-            const newPriorityPrice = priority ? order.orderPrice * 0.05 : 0; // Prilagođavamo korišćenje podataka prema tipizaciji
+            const newPriorityPrice = priority ? order.orderPrice * 0.05 : 0; 
             setPriorityPrice(newPriorityPrice);
         }
     }, [priority, order]);
@@ -64,9 +64,13 @@ const OrderStatus = () => {
     const calculateRemainingMinutes = (estimatedDelivery: string) => {
         const now = new Date();
         const deliveryTime = new Date(estimatedDelivery);
-        const differenceInMillis = deliveryTime.getTime() - now.getTime(); // Promenjen način računanja razlike
+        const differenceInMillis = deliveryTime.getTime() - now.getTime(); 
         const differenceInMinutes = Math.ceil(differenceInMillis / 60000);
+        if(order) {
+          return  differenceInMinutes - 8
+        }
         return differenceInMinutes;
+       
     };
 
     return (
